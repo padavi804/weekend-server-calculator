@@ -8,20 +8,47 @@ app.use(express.static('server/public'));
 // Global variable that will contain all of the
 // calculation objects:
 let calculations = []
-
+let result;
 
 // Here's a wonderful place to make some routes:
 
 // GET /calculations
+
 app.get('/calculations', (req, res) => {
   res.send(calculations);
 });
+
 // POST /calculations
 
-app.post('/calculations', function (req, res){
+app.post('/calculations', function (req, res) {
   console.log('we heard a request to POST to calculations');
-  let newCalculation = req.body
-  calculations.push(newCalculation);
+  let data = req.body
+  let operator = data.operator;
+  let numOne = Number(data.numOne);
+  let numTwo = Number(data.numTwo);
+
+  if (operator === '+') {
+    result = numOne + numTwo;
+    console.log('sum is:', result)
+  } else if (operator === '-') {
+    result = numOne - numTwo;
+    console.log('difference is:', result)
+  }else if (operator === '*') {
+    result = numOne * numTwo;
+    console.log('product is:', result)
+  }else if (operator === '/') {
+    result = numOne / numTwo;
+    console.log('quotient is:', result)
+  }
+
+  let mathObject = {
+    numOne: numOne,
+    numTwo: numTwo,
+    operator: operator,
+    result: result
+  };
+
+  calculations.push(mathObject);
   res.sendStatus(201);
 })
 

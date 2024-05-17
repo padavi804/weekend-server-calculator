@@ -28,51 +28,45 @@ getCalculations();
 //                     `;
 //     }
 // }
+
 let calculatorOperator = '';
 
 // listener events for operator
-// function findOperator(event) {
-   
+
 // add
-document.getElementById('add').addEventListener('click', function(event){
+document.getElementById('add').addEventListener('click', function (event) {
     event.preventDefault();
     calculatorOperator = '+';
     document.querySelector('#calculator').value = calculatorOperator;
-    // return calculatorOperator;
 });
 // subtract
-document.getElementById('subtract').addEventListener('click', function(event){
+document.getElementById('subtract').addEventListener('click', function (event) {
     event.preventDefault();
     calculatorOperator = '-';
     document.querySelector('#calculator').value = calculatorOperator;
-    // return calculatorOperator;
 });
 // multiply
-document.getElementById('multiply').addEventListener('click', function(event){
+document.getElementById('multiply').addEventListener('click', function (event) {
     event.preventDefault();
     calculatorOperator = '*';
     document.querySelector('#calculator').value = calculatorOperator;
-    // return calculatorOperator;
 });
 // divide
-document.getElementById('divide').addEventListener('click', function(event){
+document.getElementById('divide').addEventListener('click', function (event) {
     event.preventDefault();
     calculatorOperator = '/';
     document.querySelector('#calculator').value = calculatorOperator;
-    // return calculatorOperator;
 });
 // }
 
-function submitForm(event){
+function submitForm(event) {
     event.preventDefault();
     console.log('Checking submitForm function');
 
-    // findOperator(event);
 
     // Store numbers and operator in variables
     let numOne = document.getElementById('numOne').value;
     let numTwo = document.getElementById('numTwo').value;
-    // let operator = findOperator(event);
 
     // Create object to send to the server
     let calculations = {
@@ -80,23 +74,24 @@ function submitForm(event){
         numTwo: numTwo,
         operator: calculatorOperator
     }
-console.log('Sending calculations to server', calculations)
+    console.log('Sending calculations to server', calculations)
 
-// Send the calculation to the server
+
+    
+    // Send the calculation to the server
     axios({
         method: 'POST',
         url: '/calculations',
         data: calculations
-}).then(function(response){
-    console.log('Calculation added');
+    }).then(function (response) {
+        console.log('Calculation added');
 
-// clear the inputs
-numOne.value = '';
-numTwo.value = '';
-// operator = '';
+        // clear the inputs
+        numOne.value = '';
+        numTwo.value = '';
 
-// Refresh the calculation history
-getCalculations();
-});
+        // Refresh the calculation history
+        getCalculations();
+    });
 
 }
