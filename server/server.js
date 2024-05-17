@@ -18,7 +18,12 @@ app.get('/calculations', (req, res) => {
 });
 // POST /calculations
 
-
+app.post('/calculations', function (req, res){
+  console.log('we heard a request to POST to calculations');
+  let newCalculation = req.body
+  calculations.push(newCalculation);
+  res.sendStatus(201);
+})
 
 
 
