@@ -23,24 +23,26 @@ getCalculations();
 
 function renderNew(calculations) {
     console.log('render newest calculation to DOM', calculations);
+    if (calculations.length === 0){
+        console.log('No calculations to render')
+        return;
+    }
     let latestResult = calculations[calculations.length - 1];
     let newResult = document.querySelector('#recentResult');
-    newResult.innerHTML = latestResult;
-
-    for (let item of calculations) {
-        newResult.innerHTML += `
-        <p>${item.numOne} ${item.operator} ${item.numTwo} = ${item.result}
+    newResult.innerHTML = latestResult = `
+        <p>${latestResult.numOne} ${latestResult.operator} ${latestResult.numTwo} = ${latestResult.result}
         </p>`
     };
-}
+
 
 function renderHistory(calculations) {
     console.log('render calculations', calculations);
-    let newResult = document.querySelector('#resultHistory');
-    newResult.innerHTML = '';
+    let pastResult = document.querySelector('#resultHistory');
+    pastResult.innerHTML = '';
 
-    for (let item of calculations) {
-        newResult.innerHTML += `
+    for (let i = 0; i < calculations.length -1; i++) {
+        let item = calculations[i];
+        pastResult.innerHTML += `
         <p>${item.numOne} ${item.operator} ${item.numTwo} = ${item.result}
         </p>`
     };
@@ -113,10 +115,8 @@ function submitForm(event) {
 
 }
 
-function clear(event) {
-    event.preventDefault();
+// function clear(event) {
+//     event.preventDefault();
 
-    document.querySelector('#calculator').value = '';
-    document.getElementById('numOne').value = '';
-    document.getElementById('numTwo').value = '';
-}
+//     document.querySelector('#calculator').reset();
+// }
