@@ -41,14 +41,14 @@ app.post('/calculations', function (req, res) {
     console.log('quotient is:', result)
   }
 
-  let mathObject = {
+  let equationFull = {
     numOne: numOne,
     numTwo: numTwo,
     operator: operator,
     result: result
   };
 
-  calculations.push(mathObject);
+  calculations.push(equationFull);
   res.sendStatus(201);
 })
 

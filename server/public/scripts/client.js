@@ -6,9 +6,11 @@ function getCalculations() {
         url: '/calculations'
     })
         .then(function (response) {
-            console.log('This is the full rsponse object', response)
+            // console.log('This is the full rsponse object', response)
             let data = response.data;
             console.log('The actual payload we care about', data);
+            renderNew(data);
+            renderHistory(data);
             // renderToDom(data);
         }).catch(function (error) {
             console.log('error getting calculations', error)
@@ -19,15 +21,30 @@ function getCalculations() {
 getCalculations();
 
 
-// function renderToDom(calculationsFromServer) {
-//     let contentDiv = document.querySelector('#resultHistory');
-//     contentDiv.innerHTML = ``;
-//     for (let result of calculationsFromServer) {
-//         contentDiv.innerHTML += `
-//                     <p>${result.value}</p>
-//                     `;
-//     }
-// }
+function renderNew(calculations) {
+    console.log('render newest calculation to DOM', calculations);
+    let latestResult = calculations[calculations.length - 1];
+    let newResult = document.querySelector('#recentResult');
+    newResult.innerHTML = latestResult;
+
+    for (let item of calculations) {
+        newResult.innerHTML += `
+        <p>${item.numOne} ${item.operator} ${item.numTwo} = ${item.result}
+        </p>`
+    };
+}
+
+function renderHistory(calculations) {
+    console.log('render calculations', calculations);
+    let newResult = document.querySelector('#resultHistory');
+    newResult.innerHTML = '';
+
+    for (let item of calculations) {
+        newResult.innerHTML += `
+        <p>${item.numOne} ${item.operator} ${item.numTwo} = ${item.result}
+        </p>`
+    };
+}
 
 let calculatorOperator = '';
 
@@ -61,7 +78,7 @@ document.getElementById('divide').addEventListener('click', function (event) {
 
 function submitForm(event) {
     event.preventDefault();
-    console.log('Checking submitForm function');
+    // console.log('Checking submitForm function');
 
 
     // Store numbers and operator in variables
@@ -94,4 +111,12 @@ function submitForm(event) {
         getCalculations();
     });
 
+}
+
+function clear(event) {
+    event.preventDefault();
+
+    document.querySelector('#calculator').value = '';
+    document.getElementById('numOne').value = '';
+    document.getElementById('numTwo').value = '';
 }
