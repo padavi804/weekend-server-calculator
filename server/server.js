@@ -33,10 +33,10 @@ app.post('/calculations', function (req, res) {
   } else if (operator === '-') {
     result = numOne - numTwo;
     console.log('difference is:', result)
-  }else if (operator === '*') {
+  } else if (operator === '*') {
     result = numOne * numTwo;
     console.log('product is:', result)
-  }else if (operator === '/') {
+  } else if (operator === '/') {
     result = numOne / numTwo;
     console.log('quotient is:', result)
   }

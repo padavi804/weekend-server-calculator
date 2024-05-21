@@ -20,10 +20,10 @@ function getCalculations() {
 
 getCalculations();
 
-
+// render most recent calculation
 function renderNew(calculations) {
     console.log('render newest calculation to DOM', calculations);
-    if (calculations.length === 0){
+    if (calculations.length === 0) {
         console.log('No calculations to render')
         return;
     }
@@ -32,20 +32,24 @@ function renderNew(calculations) {
     newResult.innerHTML = latestResult = `
         <p>${latestResult.numOne} ${latestResult.operator} ${latestResult.numTwo} = ${latestResult.result}
         </p>`
-    };
+};
 
-
+// render all calculations except for most recent
 function renderHistory(calculations) {
     console.log('render calculations', calculations);
-    let pastResult = document.querySelector('#resultHistory');
-    pastResult.innerHTML = '';
+    if (calculations.length > 0) {
+        let pastResult = document.querySelector('#resultHistory');
+        pastResult.innerHTML = '';
 
-    for (let i = 0; i < calculations.length -1; i++) {
-        let item = calculations[i];
-        pastResult.innerHTML += `
+        calculations.reverse();
+
+        for (let i = 1; i < calculations.length; i++) {
+            let item = calculations[i];
+            pastResult.innerHTML += `
         <p>${item.numOne} ${item.operator} ${item.numTwo} = ${item.result}
         </p>`
-    };
+        };
+    }
 }
 
 let calculatorOperator = '';
@@ -96,7 +100,7 @@ function submitForm(event) {
     console.log('Sending calculations to server', calculations)
 
 
-    
+
     // Send the calculation to the server
     axios({
         method: 'POST',
@@ -115,8 +119,11 @@ function submitForm(event) {
 
 }
 
-// function clear(event) {
-//     event.preventDefault();
+function clearVal(event) {
+    event.preventDefault();
 
-//     document.querySelector('#calculator').reset();
-// }
+    document.getElementById('numOne').value = '';
+    document.getElementById('numTwo').value = '';
+    document.querySelector('#calculator').value = '';
+    calculatorOperator = '';
+}

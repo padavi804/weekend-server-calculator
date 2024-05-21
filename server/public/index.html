@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Server-Side Calculator</title>    
-    <link rel="stylesheet" href="styles/style.css">
-    <script defer src="scripts/axios.js"></script>
-    <script defer src="scripts/client.js" charset="utf-8"></script>
-  </head>
-  <body>
-    <h1>Server-Side Calculator</h1>
 
-    <form data-testid="calculator" onSubmit="submitForm(event)" id="calculator">
-      <input data-testid="numOne" placeholder="First Number" id="numOne">
-      <button id="add">+</button>
-      <button id="subtract">-</button>
-      <button id="multiply">*</button>
-      <button id="divide">/</button>
-      <input data-testid="numTwo" placeholder="Second Number" id="numTwo">
-      <button type="submit" id="equals">=</button>
-      <button type="button" value="Reset" onClick="window.location.reload()" id="clear">C</button>
-    </form>
+<head>
+  <meta charset="utf-8">
+  <title>Server-Side Calculator</title>
+  <link rel="stylesheet" href="styles/style.css">
+  <script defer src="scripts/axios.js"></script>
+  <script defer src="scripts/client.js" charset="utf-8"></script>
+</head>
 
-    <section data-testid="recentResult" id="recentResult">
-      <!-- The most recent calculation result goes here. -->
-    </section>
+<body>
+  <h1>Server-Side Calculator</h1>
 
-    <section data-testid="resultHistory" id="resultHistory">
-      <!-- The list of calculation results goes here. -->
-    </section>
-  </body>
+  <form data-testid="calculator" onSubmit="submitForm(event)" id="calculator">
+    <input data-testid="numOne" placeholder="First Number" id="numOne">
+    <button id="add">+</button>
+    <button id="subtract">-</button>
+    <button id="multiply">*</button>
+    <button id="divide">/</button>
+    <input data-testid="numTwo" placeholder="Second Number" id="numTwo">
+    <button type="submit" id="equals">=</button>
+    <button type="button" onClick="clearVal(event)" id="clear">C</button>
+  </form>
+
+  <section data-testid="recentResult" id="recentResult">
+    <!-- The most recent calculation result goes here. -->
+  </section>
+
+  <section data-testid="resultHistory" id="resultHistory">
+    <!-- The list of calculation results goes here. -->
+  </section>
+</body>
+
 </html>
